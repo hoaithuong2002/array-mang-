@@ -4,9 +4,14 @@
     <title>Title</title>
 </head>
 <style>
+    table{
+        margin-left: auto;
+        margin-right: auto;
+
+    }
     td {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         text-align: center;
         font-size: 30px;
     }
@@ -71,14 +76,15 @@
         }
 
         // }
-        console.log(getValueCell(0,0));
+        // console.log(getValueCell(0,0));
         checkVertical(x,y);
         checkHorizontal(x,y);
         checkCross1(x,y);
         checkCross2(x,y);
     }
 
-    function getValueCell(x,y) {
+    function getValueCell(x,y){
+        if(x < 0 || y < 0 || x >= MAX_ROW || y >= MAX_COL) return "";
         return document.getElementById(`cell-${x}-${y}`).innerHTML;
     }
 
@@ -101,7 +107,7 @@
             score+=1;
             j++;
         }
-        gameOver(score);
+        checkWin(score);
     }
 
     function checkHorizontal(x,y) {
@@ -117,23 +123,26 @@
             j++;
         }
 
-        gameOver(score);
+        checkWin(score);
     }
 
-    function gameOver(score) {
+    function checkWin(score) {
+        // console.log(score);
         if(score >= 5){
-
-            for (let i = 0; i < winArr.length; i++) {
-                winArr[i].classList.add("win");
-            }
-
-            setTimeout(function () {
-                alert("Win");
+            // alert("Win!")
+            // for (let i = 0; i < winArr.length; i++) {
+            //     winArr[i].classList.add("win");
+            // }
+            //
+            setTimeout(function (){
+                alert("Win!");
             },100);
+            // console.log("Ư")
 
+``
         }
-    }
 
+    }
     function checkCross1(x,y) {
         let score = 1;
         let i = 1;
@@ -146,9 +155,10 @@
             score+=1;
             j++;
         }
-        gameOver(score);
+        checkWin(score);
     }
 
+    
     function checkCross2(x,y) {
         let score = 1;
         let i = 1;
@@ -161,9 +171,8 @@
             score+=1;
             j++;
         }
-        gameOver(score);
+        checkWin(score);
     }
-
     drawBoard();
 </script>
 </body>
